@@ -1,0 +1,3 @@
+I define a recursive CTE paths(src, tgt) that starts from all links whose source is 'home'.
+The recursive step joins paths.tgt to PageLinks.source so we keep following links outward from any page reached so far, collecting all reachable targets.
+In the final query I select distinct tgt values (renamed reachable_page) where the page name matches the regex '(ref|polic)' with ~* for case-insensitive matching, and order the result alphabetically.

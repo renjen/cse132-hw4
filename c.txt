@@ -1,0 +1,4 @@
+I join Product and Review on pid to connect each product with its reviews, and restrict to products whose category is 'electronics'.
+Since comments is an array, I use CROSS JOIN LATERAL unnest(r.comments) to turn each individual comment into its own row (aliased as c).
+Then I filter to comments where the text matches the case-insensitive regex '(defect|broken)' using ~*.
+Finally, I select distinct pairs of pname and the matching comment (as matching_comment) and order them by product name and comment.

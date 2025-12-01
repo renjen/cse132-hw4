@@ -1,0 +1,5 @@
+I first build a recursive CTE Subtopics(tid, tname, parent_tid) that starts from the row where tname = 'Support' and repeatedly follows child topics by joining Topic.parent_tid to the tid values already in Subtopics.
+This collects Support and all of its descendant topics.
+Then I join Subtopics with Discussion on tid and use CROSS JOIN LATERAL unnest(d.messages) to expand each message in the messages array into a separate row (aliased as msg).
+I keep only rows where msg matches the case-insensitive regex '(refund|return)' using ~*, and I exclude the root topic itself (tname <> 'Support') so only descendant topics remain.
+Finally, I return distinct pairs of topic name (tname) and matching message text (msg) and order them by topic name and message.

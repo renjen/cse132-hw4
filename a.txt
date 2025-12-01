@@ -1,0 +1,4 @@
+I use a recursive CTE called Hierarchy to traverse the manager chain.
+The base case selects each employee’s name and their direct manager’s eid from Employee (only rows where managerid is not NULL).
+The recursive case takes each row from Hierarchy and joins it to Employee again using managerid = eid to move one level up the management chain; it keeps doing this as long as the current manager also has a manager.
+After the CTE has collected all employee → (any manager above them) pairs, the outer query joins the final managerid back to Employee to get the manager’s name.
